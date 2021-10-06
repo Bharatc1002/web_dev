@@ -1,1 +1,5 @@
 Chat app with live typing.
+
+users can chat with particular user without affecting each other.
+can see the status of other if they online or offline.
+can see what other user typing even that user didn't sent message.
