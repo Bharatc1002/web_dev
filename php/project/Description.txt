@@ -2,4 +2,9 @@ Chat app with live typing.
 
 users can chat with particular user without affecting each other.
 can see the status of other if they online or offline.
+
+user have to sign up first to use it.
+if user already sign up and then logged out then he can login again using same credentials.
+user can log out at any time, and once log out other users will immediately know that that user is offline.
+
 can see what other user typing even that user didn't sent message.
