@@ -23,4 +23,12 @@ services:
       MYSQL_USER: devuser
       MYSQL_PASSWORD: devpass
     ports:
-      - 6033:3306
+      - 6033:80
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
