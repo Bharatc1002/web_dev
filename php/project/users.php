@@ -15,19 +15,18 @@
             <header>
               <div class="content">
                 <img src="https://media.gettyimages.com/photos/napoleon-crossing-the-saintbernard-pass-20-may-1800-18011802-oil-on-picture-id544234302?s=612x612" alt="">
-                <!-- <?php 
-                  $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
-                  if(mysqli_num_rows($sql) > 0){
-                    $row = mysqli_fetch_assoc($sql);
-                  }
+                <?php 
+                  // $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+                  // if(mysqli_num_rows($sql) > 0){
+                  //   $row = mysqli_fetch_assoc($sql);
+                  // }
                 ?>
-                 -->
                 <div class="details">
                   <span>Chat App User</span>
                   <p>Active Now</p>
                 </div>
               </div>
-              <a href="login.html" class="logout">Logout</a>
+              <a href="login.php" class="logout">Logout</a>
             </header>
             <div class="search">
               <span class="text">Select an user to start chat</span>
