@@ -1,12 +1,11 @@
-
 <?php
+  $hostname = "mysql8";
+  $username = "devuser";
+  $password = "devpass";
+  $dbname = "test_db";
 
-$conn = mysqli_connect("mysql8", "root", "root", "chat");
-if($conn){
-    echo "Database connected" . mysqli_connect_error();
-} else {
-    echo "Error";
-}
-
-
+  $conn = mysqli_connect($hostname, $username, $password, $dbname);
+  if(!$conn){
+    echo "Database connection error".mysqli_connect_error();
+  }
 ?>
