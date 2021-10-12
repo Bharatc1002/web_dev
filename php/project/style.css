@@ -205,6 +205,7 @@ body{
   content: '\f00d';
 }
 .users-list{
+  /* position: relative; */
   max-height: 350px;
   overflow-y: auto;
 }
@@ -235,7 +236,14 @@ body{
 }
 .users-list a .status-dot.offline{
   color: #ccc;
+  
 }
+
+/* Unread message CSS part */
+/* .users-list a .content {
+  position: relative;
+} */
+
 
 /* Chat Area CSS Start */
 .chat-area header{

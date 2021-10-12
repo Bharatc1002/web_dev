@@ -16,14 +16,25 @@
         ($outgoing_id == $row['unique_id']) ? $hid_me = "hide" : $hid_me = "";
 
         $output .= '<a href="chat.php?user_id='. $row['unique_id'] .'">
-                    <div class="content">
+                    <div class="content" style="position: relative;">
                     <img src="php/images/'. $row['img'] .'" alt="">
                     <div class="details">
                         <span>'. $row['fname']. " " . $row['lname'] .'</span>
                         <p>'. $you . $msg .'</p>
                     </div>
+                    <div style="width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    color: black;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    text-align: center;
+                    background-color: orange;">h</div>
                     </div>
                     <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
+                    
                 </a>';
     }
 ?>
+ 

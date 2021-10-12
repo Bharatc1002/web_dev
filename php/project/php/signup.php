@@ -37,10 +37,10 @@
                                         $result = mysqli_fetch_assoc($select_sql2);
                                         $_SESSION['unique_id'] = $result['unique_id'];
                                         echo "success";
-                                    }else{
+                                    } else{
                                         echo "This email address not Exist!";
                                     }
-                                }else{
+                                } else{
                                     echo "Something went wrong. Please try again!";
                                 }
                             }
