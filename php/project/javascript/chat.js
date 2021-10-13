@@ -3,8 +3,39 @@ incoming_id = form.querySelector(".incoming_id").value,
 inputField = form.querySelector(".input-field"),
 sendBtn = form.querySelector("button"),
 chatBox = document.querySelector(".chat-box");
+
 form.onsubmit = (e)=>{
     e.preventDefault();
+}
+
+inputField.onfocus = () => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "php/typeset.php", true);
+    xhr.onload = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+                let data = xhr.response;
+                console.log("set done");
+            }
+        }
+    }
+    let formData = new FormData(form);
+    xhr.send(formData);
+}
+
+inputField.onblur = () => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "php/typedestroy.php", true);
+    xhr.onload = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+                let data = xhr.response;
+                console.log("destruction done");
+            }
+        }
+    }
+    let formData = new FormData(form);
+    xhr.send(formData);
 }
 
 inputField.focus();

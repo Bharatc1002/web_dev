@@ -42,6 +42,5 @@
   <script src="javascript/chat.js"></script>
   <script src="javascript/status.js"></script>
   <script src="javascript/set_readstatus.js"></script>
-
 </body>
 </html>
