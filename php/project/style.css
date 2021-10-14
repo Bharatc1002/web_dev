@@ -183,6 +183,7 @@ body{
   opacity: 1;
   pointer-events: auto;
 }
+
 .users .search button{
   position: relative;
   z-index: 1;
@@ -335,6 +336,7 @@ body{
   outline: none;
   border-radius: 5px 0 0 5px;
 }
+
 .typing-area button{
   color: #fff;
   width: 55px;

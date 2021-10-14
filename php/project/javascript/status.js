@@ -7,8 +7,8 @@ setInterval(() => {
     xhr.onload = ()=> {
         if(xhr.status === 200){
             let data = xhr.response;
-            console.log(data);
             status1.innerHTML = data;
+            
           }
     }
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

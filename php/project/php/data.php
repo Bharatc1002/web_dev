@@ -41,12 +41,12 @@
         }
 
         $typing = mysqli_query($conn, "SELECT * FROM typeStatus
-                                        WHERE sender_id={$row2['outgoing_msg_id']}
+                                        WHERE sender_id={$row['unique_id']}
                                         AND receiver_id={$_SESSION['unique_id']}");
 
         $type_status = mysqli_fetch_assoc($typing);
         
-        if($type_status['type_status'] == 'start'){
+        if($type_status['type_status'] == 1){
             $typ = "Typing...";   
         } else {
             $typ = $you . $msg;

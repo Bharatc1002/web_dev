@@ -2,49 +2,56 @@ const form = document.querySelector(".typing-area"),
 incoming_id = form.querySelector(".incoming_id").value,
 inputField = form.querySelector(".input-field"),
 sendBtn = form.querySelector("button"),
-chatBox = document.querySelector(".chat-box");
+chatBox = document.querySelector(".chat-box"),
+backBtn = document.querySelector("header .back-icon");
 
 form.onsubmit = (e)=>{
     e.preventDefault();
-}
-
-inputField.onfocus = () => {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/typeset.php", true);
-    xhr.onload = () => {
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                let data = xhr.response;
-                console.log("set done");
-            }
-        }
-    }
-    let formData = new FormData(form);
-    xhr.send(formData);
-}
-
-inputField.onblur = () => {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/typedestroy.php", true);
-    xhr.onload = () => {
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                let data = xhr.response;
-                console.log("destruction done");
-            }
-        }
-    }
-    let formData = new FormData(form);
-    xhr.send(formData);
 }
 
 inputField.focus();
 inputField.onkeyup = ()=>{
     if(inputField.value != ""){
         sendBtn.classList.add("active");
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/typeset.php", true);
+        xhr.onload = () => {
+            if(xhr.readyState === XMLHttpRequest.DONE){
+                if(xhr.status === 200){
+                    console.log("set done");
+                }
+            }
+        }
+        let formData = new FormData(form);
+        xhr.send(formData);
     }else{
         sendBtn.classList.remove("active");
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/typedestroy.php", true);
+        xhr.onload = () => {
+            if(xhr.readyState === XMLHttpRequest.DONE){
+                if(xhr.status === 200){
+                    console.log("destruction done");
+                }
+            }
+        }
+        let formData = new FormData(form);
+        xhr.send(formData);
     }
+}
+
+backBtn.onclick = ()=>{
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "php/typedestroy.php", true);
+    xhr.onload = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+                console.log("destruction done");
+            }
+        }
+    }
+    let formData = new FormData(form);
+    xhr.send(formData);
 }
 
 sendBtn.onclick = ()=>{
@@ -54,7 +61,20 @@ sendBtn.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
               inputField.value = "";
+              sendBtn.classList.remove("active");
               scrollToBottom();
+              let xhr1 = new XMLHttpRequest();
+              xhr1.open("POST", "php/typedestroy.php", true);
+              xhr1.onload = () => {
+                  if(xhr1.readyState === XMLHttpRequest.DONE){
+                      if(xhr1.status === 200){
+                          console.log("destruction done");
+                      }
+                  }
+              }
+              let formData = new FormData(form);
+              xhr1.send(formData);
+              
           }
       }
     }
