@@ -88,6 +88,7 @@ body{
   cursor: pointer;
   margin-top: 13px;
 }
+
 .form form .field i{
   position: absolute;
   right: 15px;
@@ -329,7 +330,7 @@ body{
 }
 .typing-area input{
   height: 45px;
-  width: calc(100% - 58px);
+  width: calc(100% - 116px);
   font-size: 16px;
   padding: 0 13px;
   border: 1px solid #e6e6e6;

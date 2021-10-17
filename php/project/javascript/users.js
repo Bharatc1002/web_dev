@@ -1,6 +1,8 @@
 const searchBar = document.querySelector(".search input"),
 searchIcon = document.querySelector(".search button"),
-usersList = document.querySelector(".users-list");
+usersList = document.querySelector(".users-list"),
+userUpdate = document.querySelector(".users header .content");
+
 
 searchIcon.onclick = ()=>{
   searchBar.classList.toggle("show");
@@ -49,3 +51,10 @@ setInterval(() =>{
   xhr.send();
 }, 500);
 
+userUpdate.onsubmit  = (e)=>{
+  e.preventDefault();
+}
+
+userUpdate.onclick = ()=>{
+  location.href = "update.php";
+}
