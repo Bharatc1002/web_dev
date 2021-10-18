@@ -5,7 +5,7 @@
     header("location: login.php");
   }
 ?>
-<?php include_once "header.php"; ?>
+<?php include_once "header.php"; include_once "php/style.php"; ?>
 <body>
   <div class="wrapper">
     <section class="users">
@@ -17,12 +17,16 @@
               $row = mysqli_fetch_assoc($sql);
             }
           ?>
-          <img src="php/images/<?php echo $row['img']; ?>" alt="">
+          <div style="position: relative;">
+            <img src="php/images/<?php echo $row['img']; ?>" style="<?php echo $my_img ?>" alt="">
+            <i class="fa fa-edit" style="<?php echo $edit_style ?>"></i>
+          </div>
           <div class="details">
             <span><?php echo $row['fname']. " " . $row['lname'] ?></span>
             <p><?php echo $row['status']; ?></p>
           </div>
         </div>
+        <i class="fas fa-users" style="display: flex;"></i>
         <a href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>" class="logout">Logout</a>
       </header>
       <div class="search">

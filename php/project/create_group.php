@@ -29,7 +29,7 @@
     </section>
     <!-- <section class="users"> -->
     <header>
-            <span style="margin-left: 30px; margin-bottom: 0px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; outline: none">Update Your Details</span>
+            <span style="margin-left: 30px; margin-bottom: 0px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; outline: none">Make New Group</span>
       </header>
     <!-- </section> -->
     <section class="form signup">
@@ -37,28 +37,20 @@
         <div class="error-text"></div>
         <div class="name-details">
           <div class="field input">
-            <label>First Name</label>
-            <input type="text" name="fname" placeholder="<?php echo $row['fname']; ?>">
+            <label>Group Name</label>
+            <input type="text" name="gname" required>
+            <label>Select Image</label>
+            <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
           </div>
-          <div class="field input">
-            <label>Last Name</label>
-            <input type="text" name="lname" placeholder="<?php echo $row['lname']; ?>">
-          </div>
-        </div>
-        <div class="field image">
-          <label>Select Image</label>
-          <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg">
         </div>
         <div class="field button" style="display: flex; align-items: stretch;">
-          <input type="submit" class="update" style="width:40%;" name="submit" value="Update Details">
+          <input type="submit" class="create" style="width:40%;" name="submit" value="Create Group">
         </div>
       </form>
       <input type="submit" class="back" style="<?php echo $backbtn; ?>" name="Back" value="Back To Chat">
-
     </section>
   </div>
-    
-  <script src="javascript/update.js"></script>
+  <script src="javascript/create_group.js"></script>
 
 </body>
 </html>

@@ -12,7 +12,6 @@ backBtn.onclick = ()=>{
 }
 
 updateBtn.onclick = ()=>{
-    console.log("hello");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/update.php", true);
     xhr.onload = ()=>{
@@ -21,6 +20,8 @@ updateBtn.onclick = ()=>{
                 let data = xhr.response;
                 if(data == "success"){
                   location.href="users.php";
+                } else {
+                    console.log(data);
                 }
             }
         }

@@ -8,10 +8,19 @@
         $query2 = mysqli_query($conn, $sql2);
         $row2 = mysqli_fetch_assoc($query2);
 
+
+
+        $grpquery = mysqli_query($conn, "SELECT * FROM grpmember WHERE member_id={$_SESSION['unique_id']}");
+        $grprow = mysqli_fetch_assoc($grpquery);
+        if($grprow){    
+            $grpquery2 = mysqli_query($conn, "SELECT * FROM grpadmin WHERE group_id={$grprow['group_id']}");
+            $grprow2 = mysqli_fetch_assoc($grpquery2);
+        }
+
+
+
         (mysqli_num_rows($query2) > 0) ? $result = $row2['msg'] : $result ="No message available";
-
         (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
-
         if(isset($row2['outgoing_msg_id'])){
             ($outgoing_id == $row2['outgoing_msg_id']) ? $you = "You: " : $you = "";
         }else{
@@ -63,19 +72,29 @@
         }
 
 
-        $output .= '<a href="chat.php?user_id='. $row['unique_id'] .'">
-                    <div class="content" style="position: relative;">
-                    <img src="php/images/'. $row['img'] .'" alt="">
-                    <div class="details">
-                        <span>'. $row['fname']. " " . $row['lname'] .'</span>
-                        <p>'. $typ .'</p>
-                    </div>
-                    '.$style .'
-                    </div>
+        $output .= '<a href="chat.php?user_id='. $grprow2['group_id'] .'">
+                        <div class="content" style="position: relative;">
+                        <img src="php/images/'. $grprow2['img_name'] .'" alt="">
+                        <div class="details">
+                            <span>'. $grprow2['group_name'] .'</span>
+                        </div>
+                        </div>
+                    </a>
+                    <a href="chat.php?user_id='. $row['unique_id'] .'">
+                        <div class="content" style="position: relative;">
+                        <img src="php/images/'. $row['img'] .'" alt="">
+                        <div class="details">
+                            <span>'. $row['fname']. " " . $row['lname'] .'</span>
+                            <p>'. $typ .'</p>
+                        </div>
+                        '.$style .'
+                        </div>
+
+                        <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
                     
-                    <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
-                    
-                </a>';
+                    </a>';
+
+
     }
 ?>
  
