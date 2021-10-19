@@ -4,8 +4,8 @@
   $password = "devpass";
   $dbname = "test_db";
 
-  $conn = mysqli_connect($hostname, $username, $password, $dbname);
+  $conn = new mysqli($hostname, $username, $password, $dbname);
   if(!$conn){
-    echo "Database connection error".mysqli_connect_error();
+    echo "Database connection error".$conn -> connect_error();
   }
 ?>

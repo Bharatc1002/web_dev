@@ -11,12 +11,12 @@
     <header>
         <div class="content">
           <?php 
-            $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
-            if(mysqli_num_rows($sql) > 0){
-              $row = mysqli_fetch_assoc($sql);
+            $sql = $conn -> query("CALL spUsersDetails({$_SESSION['unique_id']})");
+            if($sql -> num_rows > 0){
+              $row = $sql -> fetch_assoc();
             }
           ?>
-          <img src="php/images/<?php echo $row['img']; ?>" alt="">
+          <img src="php/images/<?php echo $row['img']; ?>" style="<?php echo $my_img; ?>" alt="">
           <div class="details">
             <span><?php echo $row['fname']. " " . $row['lname'] ?></span>
             <p>

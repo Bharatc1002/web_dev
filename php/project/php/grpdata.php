@@ -1,7 +1,7 @@
 <?php
 
 
-    while($grprow = mysqli_fetch_assoc($grpquery)){
+    while($grprow = $grpquery -> fetch_assoc()){
         // $sql2 = "SELECT * FROM messages WHERE (incoming_msg_id = {$row['unique_id']}
         //         OR outgoing_msg_id = {$row['unique_id']}) AND (outgoing_msg_id = {$outgoing_id} 
         //         OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1";
@@ -12,8 +12,8 @@
 
         // $grprow = mysqli_fetch_assoc($grpquery);
         // if($grprow){    
-            $grpquery2 = mysqli_query($conn, "SELECT * FROM grpadmin WHERE group_id={$grprow['group_id']}");
-            $grprow2 = mysqli_fetch_assoc($grpquery2);
+            $grpquery2 = $conn -> query("SELECT * FROM grpadmin WHERE group_id={$grprow['group_id']}");
+            $grprow2 = $grpquery2 -> fetch_assoc();
         // }
 
 

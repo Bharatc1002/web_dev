@@ -10,9 +10,9 @@
 if(isset($_SESSION['unique_id'])){
     include_once "config.php";
     $user_id = $_SESSION['user_id'];
-    $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$user_id}");
-    if(mysqli_num_rows($sql) > 0){
-        $row = mysqli_fetch_assoc($sql);
+    $sql = $conn -> query("SELECT * FROM users WHERE unique_id = {$user_id}");
+    if($sql -> num_rows > 0){
+        $row = $sql -> fetch_assoc();
         } else {
               
         }

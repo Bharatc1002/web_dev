@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once "config.php";
-    $gname = mysqli_real_escape_string($conn, $_POST['gname']);
+    $gname = $conn -> real_escape_string($_POST['gname']);
 
     if(isset($_FILES['image'])){
         $img_name = $_FILES['image']['name'];
@@ -19,10 +19,10 @@
             $ran_id = rand(time(), 100000000);
             $new_img_name = $time.$img_name;
             if(move_uploaded_file($tmp_name,"./images/".$new_img_name)){            
-                $insert_query = mysqli_query($conn, "INSERT INTO grpadmin(group_name, group_id, admin_id, img_name)
+                $insert_query = $conn -> query("INSERT INTO grpadmin(group_name, group_id, admin_id, img_name)
                                                         VALUES ('{$gname}', {$ran_id}, {$_SESSION['unique_id']}, '{$new_img_name}')");
                 if($insert_query){
-                   $addself = mysqli_query($conn, "INSERT INTO grpmember(group_id, member_id) VALUES({$ran_id},{$_SESSION['unique_id']})");
+                   $addself = $conn -> query("INSERT INTO grpmember(group_id, member_id) VALUES({$ran_id},{$_SESSION['unique_id']})");
                    if($addself){
                        echo "success";
                    }

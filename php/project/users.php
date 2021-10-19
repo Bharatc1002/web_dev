@@ -4,7 +4,7 @@
   if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
   } else {
-    $statusUpdate = mysqli_query($conn, "UPDATE users SET status = 'Active now' WHERE unique_id = {$_SESSION['unique_id']}");
+    $statusUpdate = $conn -> query("CALL spUpdateStatus({$_SESSION['unique_id']})");
   }
 ?>
 <?php include_once "header.php"; include_once "php/style.php"; ?>
@@ -14,9 +14,9 @@
       <header>
         <div class="content">
           <?php 
-            $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
-            if(mysqli_num_rows($sql) > 0){
-              $row = mysqli_fetch_assoc($sql);
+            $sql = $conn -> query("CALL spUsersDetails({$_SESSION['unique_id']})");
+            if($sql -> num_rows > 0){
+              $row = $sql -> fetch_assoc();
             }
           ?>
           <div style="position: relative;">

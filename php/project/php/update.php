@@ -4,12 +4,12 @@
     if(isset($_SESSION['unique_id'])){
         include_once "config.php";
 
-        $imgsql = mysqli_query($conn, "SELECT * from users WHERE unique_id = {$_SESSION['unique_id']}");
-        $old_data = mysqli_fetch_assoc($imgsql);
+        $imgsql = $conn -> query("SELECT * from users WHERE unique_id = {$_SESSION['unique_id']}");
+        $old_data = $imgsql -> fetch_assoc();
         $old_img = $old_data['img'];
 
-        $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-        $lname = mysqli_real_escape_string($conn, $_POST['lname']);
+        $fname = $conn -> real_escape_string($_POST['fname']);
+        $lname = $conn -> real_escape_string($_POST['lname']);
         
         if((isset($_FILES['image']))){
             $img_name = $_FILES['image']['name'];  
@@ -29,7 +29,7 @@
                         if(move_uploaded_file($tmp_name,"./images/".$new_img_name)){
                             if(unlink("./images/" . $old_img)){
                                 if(!empty($fname) && !empty($lname)){
-                                $update_sql = mysqli_query($conn, "UPDATE users SET fname='".$fname."', lname='".$lname."', img='".$new_img_name."'
+                                $update_sql = $conn -> query("UPDATE users SET fname='".$fname."', lname='".$lname."', img='".$new_img_name."'
                                                                     WHERE unique_id='".$_SESSION['unique_id']."'");
                                 if($update_sql){
                                     echo "success";
@@ -37,7 +37,7 @@
                                     echo "img fail";
                                 }
                             } else if(!empty($fname) && empty($lname)){
-                                $update_sql = mysqli_query($conn, "UPDATE users SET fname='".$fname."', img='".$new_img_name."'
+                                $update_sql = $conn -> query("UPDATE users SET fname='".$fname."', img='".$new_img_name."'
                                                                     WHERE unique_id='".$_SESSION['unique_id']."'");
                                 if($update_sql){
                                     echo "success";
@@ -45,7 +45,7 @@
                                     echo "img fail";
                                 }
                             } else if(empty($fname) && !empty($lname)){
-                                $update_sql = mysqli_query($conn, "UPDATE users SET lname='".$lname."', img='".$new_img_name."'
+                                $update_sql = $conn -> query("UPDATE users SET lname='".$lname."', img='".$new_img_name."'
                                                                     WHERE unique_id='".$_SESSION['unique_id']."'");
                                 if($update_sql){
                                     echo "success";
@@ -53,7 +53,7 @@
                                     echo "img fail";
                                 }
                             } else {
-                                $update_sql = mysqli_query($conn, "UPDATE users SET img='".$new_img_name."'
+                                $update_sql = $conn -> query("UPDATE users SET img='".$new_img_name."'
                                                                 WHERE unique_id='".$_SESSION['unique_id']."'");
                                 if($update_sql){
                                 echo "success";
@@ -71,7 +71,7 @@
                 }
             } else {
                 if(!empty($fname) && !empty($lname)){
-                    $update_sql = mysqli_query($conn, "UPDATE users SET fname='".$fname."', lname='".$lname."'
+                    $update_sql = $conn -> query("UPDATE users SET fname='".$fname."', lname='".$lname."'
                                                         WHERE unique_id='".$_SESSION['unique_id']."'");
                     if($update_sql){
                         echo "success";
@@ -79,7 +79,7 @@
                         echo "img fail";
                     }
                 } else if(!empty($fname) && empty($lname)){
-                    $update_sql = mysqli_query($conn, "UPDATE users SET fname='".$fname."'
+                    $update_sql = $conn -> query("UPDATE users SET fname='".$fname."'
                                                         WHERE unique_id='".$_SESSION['unique_id']."'");
                     if($update_sql){
                         echo "success";
@@ -87,7 +87,7 @@
                         echo "img fail";
                     }
                 } else if(empty($fname) && !empty($lname)) {
-                    $update_sql = mysqli_query($conn, "UPDATE users SET lname='".$lname."'
+                    $update_sql = $conn -> query("UPDATE users SET lname='".$lname."'
                                                         WHERE unique_id='".$_SESSION['unique_id']."'");
                     if($update_sql){
                         echo "success";

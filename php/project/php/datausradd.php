@@ -1,15 +1,15 @@
 <?php
 
-    while($row = mysqli_fetch_assoc($query)){
+    while($row = $query -> fetch_assoc()){
         $sql2 = "SELECT * FROM messages WHERE (incoming_msg_id = {$row['unique_id']}
                 OR outgoing_msg_id = {$row['unique_id']}) AND (outgoing_msg_id = {$outgoing_id} 
                 OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1";
-        $query2 = mysqli_query($conn, $sql2);
-        $row2 = mysqli_fetch_assoc($query2);
+        $query2 = $conn -> query($sql2);
+        $row2 = $query2 -> fetch_assoc();
 
 
 
-        (mysqli_num_rows($query2) > 0) ? $result = $row2['msg'] : $result ="No message available";
+        ($query2 -> num_rows > 0) ? $result = $row2['msg'] : $result ="No message available";
         (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
         if(isset($row2['outgoing_msg_id'])){
             ($outgoing_id == $row2['outgoing_msg_id']) ? $you = "You: " : $you = "";
@@ -22,10 +22,10 @@
         
         $sqld = "SELECT * FROM messages WHERE incoming_msg_id = {$_SESSION['unique_id']} AND 
                 outgoing_msg_id = {$row['unique_id']} AND read_state = 1";
-        $var = mysqli_query($conn, $sqld);
+        $var = $conn -> query($sqld);
 
         if($var){
-            if(mysqli_num_rows($var) > 0){
+            if($var -> num_rows > 0){
                 $style = '<div style = "width: 20px;
                 height: 20px;
                 border-radius: 50%;
@@ -35,7 +35,7 @@
                 bottom: 0;
                 text-align: center;
                 background-color: orange;"
-                >'.mysqli_num_rows($var).'</div>';
+                >'.$var -> num_rows.'</div>';
             } else {
                 $style = '<div style = "none;"></div>';
             }
@@ -43,11 +43,11 @@
             $style = '<div style = "none;"></div>';
         }
 
-        $typing = mysqli_query($conn, "SELECT * FROM typeStatus
+        $typing = $conn -> query("SELECT * FROM typeStatus
                                         WHERE sender_id={$row['unique_id']}
                                         AND receiver_id={$_SESSION['unique_id']}");
         if($typing){
-            $type_status = mysqli_fetch_assoc($typing);
+            $type_status = $typing -> fetch_assoc();
             if($type_status){
                 if($type_status['type_status'] == 1){
                     $typ = "Typing...";   

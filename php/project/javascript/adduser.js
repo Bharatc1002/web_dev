@@ -1,7 +1,8 @@
 
 const searchBar = document.querySelector(".search input"),
 searchIcon = document.querySelector(".search button"),
-usersList = document.querySelector(".users-list");
+usersList = document.querySelector(".users-list"),
+backBtn = document.querySelector(".users .back");
 
 
 
@@ -39,4 +40,9 @@ searchIcon.onclick = ()=>{
     }
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send("searchTerm=" + searchTerm);
+  }
+
+  backBtn.onclick = (e)=>{
+      e.preventDefault();
+      location.href = "users.php";
   }
