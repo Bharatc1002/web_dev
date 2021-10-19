@@ -10,15 +10,6 @@
 
 
 
-        $grpquery = mysqli_query($conn, "SELECT * FROM grpmember WHERE member_id={$_SESSION['unique_id']}");
-        $grprow = mysqli_fetch_assoc($grpquery);
-        if($grprow){    
-            $grpquery2 = mysqli_query($conn, "SELECT * FROM grpadmin WHERE group_id={$grprow['group_id']}");
-            $grprow2 = mysqli_fetch_assoc($grpquery2);
-        }
-
-
-
         (mysqli_num_rows($query2) > 0) ? $result = $row2['msg'] : $result ="No message available";
         (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
         if(isset($row2['outgoing_msg_id'])){
@@ -35,16 +26,21 @@
         $var = mysqli_query($conn, $sqld);
 
         if($var){
+            
             if(mysqli_num_rows($var) > 0){
-                $style = '<div style = "width: 20px;
-                height: 20px;
+                $style = '<div style = "position: absolute;
+                bottom: -3px;
+                righleftt: -3px;
+                cursor: pointer;
                 border-radius: 50%;
+                height: 20px;
+                width: 20px;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                background-color: white;
                 color: black;
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                text-align: center;
-                background-color: orange;"
+                box-shadow: 0 0 8px 3px #b8b8b8;"
                 >'.mysqli_num_rows($var).'</div>';
             } else {
                 $style = '<div style = "none;"></div>';
@@ -70,24 +66,18 @@
         } else {
             $typ = $you . $msg;
         }
+        
 
 
-        $output .= '<a href="chat.php?user_id='. $grprow2['group_id'] .'">
+        $output .= '<a href="chat.php?user_id='. $row['unique_id'] .'">
                         <div class="content" style="position: relative;">
-                        <img src="php/images/'. $grprow2['img_name'] .'" alt="">
-                        <div class="details">
-                            <span>'. $grprow2['group_name'] .'</span>
-                        </div>
-                        </div>
-                    </a>
-                    <a href="chat.php?user_id='. $row['unique_id'] .'">
-                        <div class="content" style="position: relative;">
-                        <img src="php/images/'. $row['img'] .'" alt="">
-                        <div class="details">
-                            <span>'. $row['fname']. " " . $row['lname'] .'</span>
-                            <p>'. $typ .'</p>
-                        </div>
-                        '.$style .'
+                            <img src="php/images/'. $row['img'] .'" alt="">
+                            '.$style .'
+                            <div class="details">
+                                <span>'. $row['fname']. " " . $row['lname'] .'</span>
+                                <p>'. $typ .'</p>
+                            </div>
+                        
                         </div>
 
                         <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>

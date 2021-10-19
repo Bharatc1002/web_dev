@@ -113,7 +113,11 @@ body {
   text-decoration: underline;
 }
 
+
+
 /* Users List CSS Start */
+
+
 .users {
   padding: 25px 30px;
 }
@@ -130,15 +134,15 @@ body {
   border-radius: 50%;
 }
 
-:is(.users, .users-list) .content {
+:is(.users, .users-list, .grpusers-list) .content {
   display: flex;
   align-items: center;
 }
-:is(.users, .users-list) .content .details {
+:is(.users, .users-list, .grpusers-list) .content .details {
   color: #000;
   margin-left: 20px;
 }
-:is(.users, .users-list) .details span {
+:is(.users, .users-list, .grpusers-list) .details span {
   font-size: 18px;
   font-weight: 500;
 }
@@ -202,29 +206,29 @@ body {
 .search button.active i::before {
   content: "\f00d";
 }
-.users-list {
+.users-list, .grpusers-list {
   /* position: relative; */
   max-height: 350px;
   overflow-y: auto;
 }
-:is(.users-list, .chat-box)::-webkit-scrollbar {
+:is(.users-list, .grpusers-list, .chat-box)::-webkit-scrollbar {
   width: 0px;
 }
-.users-list a {
+:is(.users-list, .grpusers-list) a {
   padding-bottom: 10px;
   margin-bottom: 15px;
   padding-right: 15px;
   border-bottom-color: #f1f1f1;
 }
-.users-list a:last-child {
+:is(.users-list, .grpusers-list) a:last-child {
   margin-bottom: 0px;
   border-bottom: none;
 }
-.users-list a img {
-  height: 40px;
-  width: 40px;
+:is(.users-list, .grpusers-list) a img {
+  height: 50px;
+  width: 50px;
 }
-.users-list a .details p {
+:is(.users-list, .grpusers-list) a .details p {
   color: #67676a;
 }
 .users-list a .status-dot {

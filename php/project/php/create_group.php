@@ -22,8 +22,11 @@
                 $insert_query = mysqli_query($conn, "INSERT INTO grpadmin(group_name, group_id, admin_id, img_name)
                                                         VALUES ('{$gname}', {$ran_id}, {$_SESSION['unique_id']}, '{$new_img_name}')");
                 if($insert_query){
-                        echo "success";
-                    } else{
+                   $addself = mysqli_query($conn, "INSERT INTO grpmember(group_id, member_id) VALUES({$ran_id},{$_SESSION['unique_id']})");
+                   if($addself){
+                       echo "success";
+                   }
+                } else{
                         echo "This address not Exist!";
                     }
                 }

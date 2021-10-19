@@ -3,6 +3,8 @@
   include_once "php/config.php";
   if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
+  } else {
+    $statusUpdate = mysqli_query($conn, "UPDATE users SET status = 'Active now' WHERE unique_id = {$_SESSION['unique_id']}");
   }
 ?>
 <?php include_once "header.php"; include_once "php/style.php"; ?>
@@ -33,6 +35,9 @@
         <span class="text">Select an user to start chat</span>
         <input type="text" placeholder="Enter name to search...">
         <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="grpusers-list">
+  
       </div>
       <div class="users-list">
   
