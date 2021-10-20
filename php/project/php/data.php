@@ -2,12 +2,15 @@
 
 
     while($row = $query -> fetch_assoc()){
-        $sql2 = "SELECT * FROM messages WHERE (incoming_msg_id = {$row['unique_id']}
-                OR outgoing_msg_id = {$row['unique_id']}) AND (outgoing_msg_id = {$outgoing_id} 
-                OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1";
+
+
+        
+        clearResult($conn);
+
+        $sql2 = "CALL spDisplayUser({$row['unique_id']},{$outgoing_id})";
         $query2 = $conn -> query($sql2);
         $row2 = $query2 -> fetch_assoc();
-
+        clearResult($conn);
 
 
         ($query2 -> num_rows > 0) ? $result = $row2['msg'] : $result ="No message available";
@@ -20,10 +23,12 @@
         ($row['status'] == "Active now") ? $offline = "" : $offline = "offline";
         ($outgoing_id == $row['unique_id']) ? $hid_me = "hide" : $hid_me = "";
 
-        
-        $sqld = "SELECT * FROM messages WHERE incoming_msg_id = {$_SESSION['unique_id']} AND 
-                outgoing_msg_id = {$row['unique_id']} AND read_state = 1";
+        clearResult($conn);
+
+        $sqld = "CALL spCheckReadStatus({$_SESSION['unique_id']},{$row['unique_id']})";
         $var = $conn -> query($sqld);
+
+        clearResult($conn);
 
         if($var){
             
@@ -49,9 +54,10 @@
             $style = '<div style = "none;"></div>';
         }
 
-        $typing = $conn -> query("SELECT * FROM typeStatus
-                                        WHERE sender_id={$row['unique_id']}
-                                        AND receiver_id={$_SESSION['unique_id']}");
+        $typing = $conn -> query("CALL spTypeStatus({$row['unique_id']},{$_SESSION['unique_id']})");
+
+        clearResult($conn);
+
         if($typing){
             $type_status = $typing -> fetch_assoc();
             if($type_status){

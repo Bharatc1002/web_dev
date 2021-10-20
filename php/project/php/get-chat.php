@@ -5,13 +5,17 @@
         $outgoing_id = $_SESSION['unique_id'];
         $incoming_id = $conn -> real_escape_string($_POST['incoming_id']);
         $output = "";
+        function clearResult($con){
+            while($con -> next_result()){
+                if($result = $con -> store_result()){
+                    $result -> free();
+                }
+            }
+        }
 
-        
-
-        $sql = "SELECT * FROM messages LEFT JOIN users ON users.unique_id = messages.outgoing_msg_id
-                WHERE (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
-                OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) ORDER BY msg_id";
+        $sql = "CALL spChat({$outgoing_id},{$incoming_id})";
         $query = $conn -> query($sql);
+        clearResult($conn);
         if($query -> num_rows > 0){
             while($row = $query -> fetch_assoc()){
                 if($row['outgoing_msg_id'] === $outgoing_id){

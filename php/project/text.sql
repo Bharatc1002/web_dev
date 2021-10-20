@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql8
--- Generation Time: Oct 19, 2021 at 01:18 PM
+-- Generation Time: Oct 20, 2021 at 01:25 PM
 -- Server version: 8.0.26
 -- PHP Version: 7.4.24
 
@@ -30,21 +30,102 @@ INSERT INTO grpmember(group_id, member_id)
 VALUES(user_id, usr_add);
 END$$
 
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spChat` (IN `o_id` INT, IN `i_id` INT)  BEGIN
+SELECT * FROM messages LEFT JOIN users ON users.unique_id = messages.outgoing_msg_id WHERE (outgoing_msg_id=o_id AND incoming_msg_id=i_id) OR (outgoing_msg_id=i_id AND incoming_msg_id=o_id) ORDER BY msg_id;
+END$$
+
 CREATE DEFINER=`devuser`@`%` PROCEDURE `spCheckAdmin` (IN `group_id` INT, IN `admin_id` INT)  BEGIN
 SELECT * FROM grpadmin WHERE group_id=group_id AND admin_id=admin_id;
 END$$
 
-CREATE DEFINER=`devuser`@`%` PROCEDURE `spCheckMember` (IN `group_id` INT, IN `usr_add` INT)  BEGIN
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spCheckMail` (IN `e_mail` VARCHAR(255))  BEGIN
+SELECT * FROM users WHERE email=e_mail;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spCheckMember` (IN `g_id` INT, IN `usr_add` INT)  BEGIN
 SELECT * FROM grpmember
-WHERE group_id=group_id AND member_id=usr_add;
+WHERE group_id=g_id AND member_id=usr_add;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spCheckReadStatus` (IN `sunique_id` INT, IN `runique_id` INT)  BEGIN
+SELECT * FROM messages WHERE incoming_msg_id=sunique_id AND 
+                outgoing_msg_id=runique_id AND read_state = 1;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spCheckTypeStatus` (IN `u_id` INT, IN `r_id` INT)  BEGIN
+SELECT * FROM typeStatus WHERE sender_id=u_id AND receiver_id=r_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spCreateGroup` (IN `g_name` VARCHAR(255), IN `g_id` INT, IN `u_id` INT, IN `img_name` VARCHAR(255))  BEGIN
+INSERT INTO grpadmin(group_name, group_id, admin_id, img_name) VALUES (g_name,g_id,u_id,img_name);
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spDisplayUser` (IN `unique_id` INT, IN `outgoing_id` INT)  BEGIN
+SELECT * FROM messages WHERE (incoming_msg_id=unique_id
+                OR outgoing_msg_id=unique_id) AND (outgoing_msg_id=outgoing_id                OR incoming_msg_id=outgoing_id) ORDER BY msg_id DESC LIMIT 1;
 END$$
 
 CREATE DEFINER=`devuser`@`%` PROCEDURE `spGroupAdmins` (IN `user_id` INT)  BEGIN
 SELECT * FROM grpadmin WHERE group_id = user_id;
 END$$
 
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spGroupChat` (IN `i_id` INT)  BEGIN
+SELECT * FROM messages LEFT JOIN users ON users.unique_id = messages.outgoing_msg_id WHERE incoming_msg_id=i_id ORDER BY msg_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spGroupData` (IN `g_id` INT)  BEGIN
+SELECT * FROM grpadmin WHERE group_id=g_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spInsertChat` (IN `i_id` INT, IN `o_id` INT, IN `message` VARCHAR(255), IN `r_count` INT)  BEGIN
+INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg, read_state)VALUES (i_id, o_id,message,r_count);
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spInsertUser` (IN `ran_id` INT, IN `first_name` VARCHAR(255), IN `last_name` VARCHAR(255), IN `e_mail` VARCHAR(255), IN `pass` VARCHAR(255), IN `img` VARCHAR(255), IN `sts` VARCHAR(255))  BEGIN
+INSERT INTO users (unique_id, fname, lname, email, password, img, status) VALUES (ran_id, first_name,last_name,e_mail,pass,img,sts);
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spLastSeen` (IN `c_time` VARCHAR(255), IN `l_date` VARCHAR(255), IN `u_id` INT)  BEGIN
+UPDATE users SET last_seenTime=c_time, last_seenDate=l_date WHERE unique_id=u_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spReadStatus` (IN `u_id` INT, IN `us_id` INT)  BEGIN
+UPDATE messages SET read_state=0 WHERE incoming_msg_id=u_id AND outgoing_msg_id=us_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spSetStatus` (IN `c_time` VARCHAR(255), IN `l_id` INT)  BEGIN
+UPDATE users SET status=c_time WHERE unique_id=l_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spSetTypeStatus` (IN `u_id` INT, IN `us_id` INT, IN `num` INT)  BEGIN
+INSERT INTO typeStatus (sender_id, receiver_id, type_status)VALUES(u_id,us_id,num);
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spShowGroup` (IN `unique_id` INT)  BEGIN
+SELECT * FROM grpmember WHERE member_id=unique_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spShowUser` (IN `outgoing_id` INT)  BEGIN
+SELECT * FROM users WHERE NOT unique_id = outgoing_id ORDER BY user_id DESC;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spTypeStatus` (IN `runique_id` INT, IN `sunique_id` INT)  BEGIN
+SELECT * FROM typeStatus
+WHERE sender_id=runique_id AND receiver_id=sunique_id;
+END$$
+
 CREATE DEFINER=`devuser`@`%` PROCEDURE `spUpdateStatus` (IN `u_id` INT)  BEGIN
 UPDATE users SET status = 'Active now' WHERE unique_id = u_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spUpdateTypeStatus` (IN `num` INT, IN `u_id` INT, IN `us_id` INT)  BEGIN
+UPDATE typeStatus SET type_status=num WHERE
+sender_id=u_id AND
+receiver_id=us_id;
+END$$
+
+CREATE DEFINER=`devuser`@`%` PROCEDURE `spUpdateUser` (IN `fname` VARCHAR(255), IN `lname` VARCHAR(255), IN `new_img_name` VARCHAR(255), IN `u_id` INT)  BEGIN
+UPDATE users SET fname=fname, lname=lname, img=new_img_name WHERE unique_id=u_id;
 END$$
 
 CREATE DEFINER=`devuser`@`%` PROCEDURE `spUsersDetails` (IN `u_id` INT)  BEGIN
@@ -72,10 +153,8 @@ CREATE TABLE `grpadmin` (
 --
 
 INSERT INTO `grpadmin` (`g_id`, `group_name`, `group_id`, `admin_id`, `img_name`) VALUES
-(5, 'egfs', 1465468544, 561478034, '1634559815abc.jpeg'),
-(7, 'new', 720593791, 561478034, '1634618650abc.jpeg'),
-(8, 'rishigroup', 934429471, 561478034, '1634635323abc.jpeg'),
-(9, 'aggroup', 270430902, 561478034, '1634649035index.jpeg');
+(1, 'newg', 1024903806, 561478034, '1634723390images.jpeg'),
+(2, 'second', 910921584, 561478034, '1634726201index.jpeg');
 
 -- --------------------------------------------------------
 
@@ -94,14 +173,11 @@ CREATE TABLE `grpmember` (
 --
 
 INSERT INTO `grpmember` (`grp_id`, `group_id`, `member_id`) VALUES
-(1, 1465468544, 415331816),
-(2, 1465468544, 561478034),
-(4, 720593791, 561478034),
-(5, 720593791, 415331816),
-(7, 934429471, 561478034),
-(8, 934429471, 415331816),
-(9, 270430902, 561478034),
-(10, 270430902, 415331816);
+(1, 1024903806, 561478034),
+(2, 1024903806, 415331816),
+(3, 1024903806, 1570027521),
+(4, 910921584, 561478034),
+(5, 910921584, 415331816);
 
 -- --------------------------------------------------------
 
@@ -113,7 +189,8 @@ CREATE TABLE `messages` (
   `msg_id` int NOT NULL,
   `incoming_msg_id` int NOT NULL,
   `outgoing_msg_id` int NOT NULL,
-  `msg` varchar(1000) NOT NULL,
+  `msg` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `file` varchar(255) DEFAULT NULL,
   `read_state` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -121,18 +198,13 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `read_state`) VALUES
-(1, 415331816, 561478034, 'gfgf', 0),
-(2, 561478034, 415331816, 'gfgfhg', 0),
-(3, 561478034, 415331816, 'Hi', 0),
-(5, 415331816, 561478034, 'hello', 0),
-(6, 561478034, 415331816, 'ok', 0),
-(7, 415331816, 561478034, 'hi', 0),
-(8, 561478034, 415331816, 'ok', 0),
-(9, 561478034, 415331816, 'ok', 0),
-(10, 415331816, 561478034, 'hi', 0),
-(11, 561478034, 415331816, 'hello', 0),
-(12, 415331816, 561478034, 'hi', 1);
+INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `file`, `read_state`) VALUES
+(1, 1024903806, 561478034, 'hi', NULL, 1),
+(2, 1024903806, 415331816, 'hi', NULL, 1),
+(3, 1024903806, 415331816, 'hws u', NULL, 1),
+(4, 1024903806, 1570027521, 'haloooo', NULL, 1),
+(5, 1024903806, 1570027521, 'NULL', '1634532033abc.jpeg', 1),
+(6, 910921584, 561478034, 'hello', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -152,12 +224,12 @@ CREATE TABLE `typeStatus` (
 --
 
 INSERT INTO `typeStatus` (`ids`, `sender_id`, `receiver_id`, `type_status`) VALUES
-(1, 561478034, 415331816, 0),
-(2, 415331816, 561478034, 0),
-(3, 415331816, 934429471, 0),
-(4, 415331816, 1465468544, 0),
-(5, 415331816, 720593791, 0),
-(6, 561478034, 1465468544, 0);
+(1, 561478034, 1024903806, 0),
+(2, 415331816, 1024903806, 0),
+(3, 1570027521, 1024903806, 0),
+(4, 561478034, 1570027521, 0),
+(5, 561478034, 910921584, 0),
+(6, 561478034, 415331816, 0);
 
 -- --------------------------------------------------------
 
@@ -183,8 +255,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `last_seenTime`, `last_seenDate`) VALUES
-(1, 561478034, 'Rishi', 'patel', 'rishi.p.addweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1634538669index.jpeg', 'Active now', '18:05:13', '2021-10-19'),
-(2, 415331816, 'Bharat', 'Chaudhary', 'bharat.c.addweb@gmail.com', '73fcee19c245fade5d57f35e0dd27c31', '1634532033abc.jpeg', 'Active now', '11:01:33', '2021-10-19');
+(1, 561478034, 'Rishi', 'Patel', 'rishi.p.addweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1634718211index.jpeg', 'Active now', '09:53:07', '2021-10-20'),
+(2, 415331816, 'Bharat', 'Chaudhary', 'bharat.c.addweb@gmail.com', '73fcee19c245fade5d57f35e0dd27c31', '1634718672abc.jpeg', 'Active now', '13:44:13', '2021-10-20'),
+(6, 1570027521, 'Ketan', 'Dabhi', 'ketan.d.addweb@gmail.com', '7c050137046892135f2616268d3d89d6', '1634723545images.jpeg', 'Active now', '15:34:24', '2021-10-20');
 
 --
 -- Indexes for dumped tables
@@ -228,19 +301,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `grpadmin`
 --
 ALTER TABLE `grpadmin`
-  MODIFY `g_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `g_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `grpmember`
 --
 ALTER TABLE `grpmember`
-  MODIFY `grp_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `grp_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `msg_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `typeStatus`
@@ -252,7 +325,7 @@ ALTER TABLE `typeStatus`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

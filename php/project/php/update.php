@@ -3,8 +3,18 @@
 
     if(isset($_SESSION['unique_id'])){
         include_once "config.php";
+        function clearResult($con){
+            while($con -> next_result()){
+                if($result = $con -> store_result()){
+                    $result -> free();
+                }
+            }
+        }
 
-        $imgsql = $conn -> query("SELECT * from users WHERE unique_id = {$_SESSION['unique_id']}");
+        $imgsql = $conn -> query(" CALL spUsersDetails({$_SESSION['unique_id']})");
+
+        clearResult($conn);
+
         $old_data = $imgsql -> fetch_assoc();
         $old_img = $old_data['img'];
 
@@ -29,77 +39,42 @@
                         if(move_uploaded_file($tmp_name,"./images/".$new_img_name)){
                             if(unlink("./images/" . $old_img)){
                                 if(!empty($fname) && !empty($lname)){
-                                $update_sql = $conn -> query("UPDATE users SET fname='".$fname."', lname='".$lname."', img='".$new_img_name."'
-                                                                    WHERE unique_id='".$_SESSION['unique_id']."'");
-                                if($update_sql){
-                                    echo "success";
-                                } else {
-                                    echo "img fail";
-                                }
-                            } else if(!empty($fname) && empty($lname)){
-                                $update_sql = $conn -> query("UPDATE users SET fname='".$fname."', img='".$new_img_name."'
-                                                                    WHERE unique_id='".$_SESSION['unique_id']."'");
-                                if($update_sql){
-                                    echo "success";
-                                } else {
-                                    echo "img fail";
-                                }
-                            } else if(empty($fname) && !empty($lname)){
-                                $update_sql = $conn -> query("UPDATE users SET lname='".$lname."', img='".$new_img_name."'
-                                                                    WHERE unique_id='".$_SESSION['unique_id']."'");
-                                if($update_sql){
-                                    echo "success";
-                                } else {
-                                    echo "img fail";
+                                    $update_sql = $conn -> query("CALL spUpdateUser('{$fname}','{$lname}','{$new_img_name}',
+                                                                    {$_SESSION['unique_id']})");
+                                    clearResult($conn);
+                                    if($update_sql){
+                                        echo "success";
+                                    }
                                 }
                             } else {
-                                $update_sql = $conn -> query("UPDATE users SET img='".$new_img_name."'
-                                                                WHERE unique_id='".$_SESSION['unique_id']."'");
-                                if($update_sql){
-                                echo "success";
-                                } else {
-                                echo "img fail";
+                                if(!empty($fname) && !empty($lname)){
+                                    $update_sql = $conn -> query("CALL spUpdateUser('{$fname}','{$lname}','{$new_img_name}',
+                                                                    {$_SESSION['unique_id']})");
+                                    clearResult($conn);;
+                                    if($update_sql){
+                                        echo "success";
+                                    }
                                 }
-                            }
-                            } else {
-                                echo "can't unlink";
                             }
                         }
                     } else {
                         echo "img invalid";
                     }
                 }
-            } else {
+            }else {
                 if(!empty($fname) && !empty($lname)){
-                    $update_sql = $conn -> query("UPDATE users SET fname='".$fname."', lname='".$lname."'
-                                                        WHERE unique_id='".$_SESSION['unique_id']."'");
+                    $update_sql = $conn -> query("CALL spUpdateUser('{$fname}','{$lname}','{$old_img}',
+                                                    {$_SESSION['unique_id']})");
+                    clearResult($conn);
                     if($update_sql){
                         echo "success";
                     } else {
-                        echo "img fail";
-                    }
-                } else if(!empty($fname) && empty($lname)){
-                    $update_sql = $conn -> query("UPDATE users SET fname='".$fname."'
-                                                        WHERE unique_id='".$_SESSION['unique_id']."'");
-                    if($update_sql){
-                        echo "success";
-                    } else {
-                        echo "img fail";
-                    }
-                } else if(empty($fname) && !empty($lname)) {
-                    $update_sql = $conn -> query("UPDATE users SET lname='".$lname."'
-                                                        WHERE unique_id='".$_SESSION['unique_id']."'");
-                    if($update_sql){
-                        echo "success";
-                    } else {
-                        echo "img fail";
-                    }
+                        echo "img fail5";
+                    } 
+                }else {
+                    echo "something went wrong";
                 }
-            } 
-        }else {
-            echo "something went wrong";
+            }
         }
-        
     }
-
     ?>

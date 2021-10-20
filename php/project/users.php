@@ -28,7 +28,7 @@
             <p><?php echo $row['status']; ?></p>
           </div>
         </div>
-        <i class="fas fa-users" style="display: flex;"></i>
+        <i class="fas fa-users" style="display: flex; cursor:pointer;"></i>
         <a href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>" class="logout">Logout</a>
       </header>
       <div class="search">

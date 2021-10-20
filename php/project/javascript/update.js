@@ -11,7 +11,8 @@ backBtn.onclick = ()=>{
     location.href="users.php";
 }
 
-updateBtn.onclick = ()=>{
+updateBtn.onclick = (e)=>{
+    e.preventDefault();
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/update.php", true);
     xhr.onload = ()=>{

@@ -5,8 +5,16 @@ include "header.php";
 ?>
 <body>
     <?php
+    function clearResult($con){
+        while($con -> next_result()){
+            if($result = $con -> store_result()){
+                $result -> free();
+            }
+        }
+    }
     $cquery = "CALL spCheckAdmin({$_SESSION['user_id']},{$_SESSION['unique_id']})";
     $csql = $conn -> query($cquery);
+    clearResult($conn);
     if($csql -> num_rows > 0){
 
     ?>

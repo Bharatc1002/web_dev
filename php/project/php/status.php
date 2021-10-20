@@ -9,8 +9,16 @@
 <?php
 if(isset($_SESSION['unique_id'])){
     include_once "config.php";
+    function clearResult($con){
+      while($con -> next_result()){
+          if($result = $con -> store_result()){
+              $result -> free();
+          }
+      }
+  }
     $user_id = $_SESSION['user_id'];
-    $sql = $conn -> query("SELECT * FROM users WHERE unique_id = {$user_id}");
+    $sql = $conn -> query("CALL spUsersDetails({$user_id})");
+    clearResult($conn);
     if($sql -> num_rows > 0){
         $row = $sql -> fetch_assoc();
         } else {

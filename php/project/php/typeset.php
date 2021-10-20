@@ -4,17 +4,22 @@ session_start();
 if(isset($_SESSION['unique_id'])){
     include_once "config.php";
     
+    function clearResult($con){
+        while($con -> next_result()){
+            if($result = $con -> store_result()){
+                $result -> free();
+            }
+        }
+    }
 
-    $sql = $conn -> query("SELECT * FROM typeStatus WHERE
-                        sender_id = '{$_SESSION['unique_id']}'
-                        AND receiver_id = {$_SESSION['user_id']}");
+    $sql = $conn -> query("CALL spCheckTypeStatus({$_SESSION['unique_id']},{$_SESSION['user_id']})");
+    clearResult($conn);
     if($sql -> num_rows > 0){
-        $sql2 = $conn -> query("UPDATE typeStatus SET type_status=1 WHERE
-                                    sender_id = {$_SESSION['unique_id']} AND
-                                    receiver_id = {$_SESSION['user_id']}");
+        $sql2 = $conn -> query("CALL spUpdateTypeStatus(1,{$_SESSION['unique_id']},{$_SESSION['user_id']})");
+        clearResult($conn);
     } else {
-        $sql3 = $conn -> query("INSERT INTO typeStatus (sender_id, receiver_id, type_status)
-                                    VALUES ({$_SESSION['unique_id']},{$_SESSION['user_id']},1)") or die();
+        $sql3 = $conn -> query("CALL spSetTypeStatus({$_SESSION['unique_id']},{$_SESSION['user_id']},1)");
+        clearResult($conn);
     }
 }
 

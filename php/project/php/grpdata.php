@@ -9,10 +9,13 @@
         // $row2 = mysqli_fetch_assoc($query2);
 
 
+        clearResult($conn);
+
 
         // $grprow = mysqli_fetch_assoc($grpquery);
         // if($grprow){    
-            $grpquery2 = $conn -> query("SELECT * FROM grpadmin WHERE group_id={$grprow['group_id']}");
+            $grpquery2 = $conn -> query("CALL spGroupData({$grprow['group_id']})");
+            clearResult($conn);
             $grprow2 = $grpquery2 -> fetch_assoc();
         // }
 

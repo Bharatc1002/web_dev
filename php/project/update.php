@@ -38,11 +38,11 @@
         <div class="name-details">
           <div class="field input">
             <label>First Name</label>
-            <input type="text" name="fname" placeholder="<?php echo $row['fname']; ?>">
+            <input type="text" name="fname" value="<?php echo $row['fname']; ?>">
           </div>
           <div class="field input">
             <label>Last Name</label>
-            <input type="text" name="lname" placeholder="<?php echo $row['lname']; ?>">
+            <input type="text" name="lname" value="<?php echo $row['lname']; ?>">
           </div>
         </div>
         <div class="field image">

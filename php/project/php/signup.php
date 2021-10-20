@@ -5,9 +5,17 @@
     $lname = $conn -> real_escape_string($_POST['lname']);
     $email = $conn -> real_escape_string($_POST['email']);
     $password = $conn -> real_escape_string($_POST['password']);
+    function clearResult($con){
+        while($con -> next_result()){
+            if($result = $con -> store_result()){
+                $result -> free();
+            }
+        }
+    }
     if(!empty($fname) && !empty($lname) && !empty($email) && !empty($password)){
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $sql = $conn -> query("SELECT * FROM users WHERE email = '{$email}'");
+            $sql = $conn -> query("CALL spCheckMail('{$email}')");
+            clearResult($conn);
             if($sql -> num_rows > 0){
                 echo "$email - This email already exist!";
             }else{
@@ -29,10 +37,10 @@
                                 $ran_id = rand(time(), 100000000);
                                 $status = "Active now";
                                 $encrypt_pass = md5($password);
-                                $insert_query = $conn -> query("INSERT INTO users (unique_id, fname, lname, email, password, img, status)
-                                VALUES ({$ran_id}, '{$fname}','{$lname}', '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')");
+                                $insert_query = $conn -> query("CALL spInsertUser({$ran_id}, '{$fname}','{$lname}', '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')");
+                                clearResult($conn);
                                 if($insert_query){
-                                    $select_sql2 = $conn -> query("SELECT * FROM users WHERE email = '{$email}'");
+                                    $select_sql2 = $conn -> query("CALL spCheckMail('{$email}')");
                                     if($select_sql2 -> num_rows > 0){
                                         $result = $select_sql2 -> fetch_assoc();
                                         $_SESSION['unique_id'] = $result['unique_id'];
