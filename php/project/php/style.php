@@ -37,5 +37,8 @@ $edit_style = "position: absolute;
 $my_img = "height: 70px;
             width: 70px;";
 
+$chat_img = "height: 150px;
+            width: 150px;";
+
 
 ?>

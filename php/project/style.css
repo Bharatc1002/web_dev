@@ -208,7 +208,7 @@ body {
 }
 .users-list, .grpusers-list {
   /* position: relative; */
-  max-height: 350px;
+  max-height: 50px;
   overflow-y: auto;
 }
 :is(.users-list, .grpusers-list, .chat-box)::-webkit-scrollbar {

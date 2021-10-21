@@ -1,5 +1,5 @@
 
-status1 = document.querySelector(".details p");
+status1 = document.querySelector(".chat-details p");
 
 setInterval(() => {
     let xhr = new XMLHttpRequest();

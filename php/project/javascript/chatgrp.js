@@ -2,8 +2,8 @@ const form = document.querySelector(".typing-area"),
 incoming_id = form.querySelector(".incoming_id").value,
 inputField = form.querySelector(".input-field"),
 sendBtn = form.querySelector("button"),
-chatBox = document.querySelector(".chat-box"),
-backBtn = document.querySelector("header .back-icon");
+chatBox = document.querySelector(".chat-box");
+// backBtn = document.querySelector("header .back-icon")
 
 form.onsubmit = (e)=>{
     e.preventDefault();
@@ -11,19 +11,21 @@ form.onsubmit = (e)=>{
 
 inputField.focus();
 inputField.onkeyup = ()=>{
-    if(inputField.value != ""){
+    if(inputField.value != "" || document.getElementById("file").value != ""){
         sendBtn.classList.add("active");
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "php/typeset.php", true);
-        xhr.onload = () => {
-            if(xhr.readyState === XMLHttpRequest.DONE){
-                if(xhr.status === 200){
-                    console.log("set done");
+        if(inputField.value != ""){
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "php/typeset.php", true);
+            xhr.onload = () => {
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    if(xhr.status === 200){
+                        console.log("set done");
+                    }
                 }
             }
+            let formData = new FormData(form);
+            xhr.send(formData);
         }
-        let formData = new FormData(form);
-        xhr.send(formData);
     }else{
         sendBtn.classList.remove("active");
         let xhr = new XMLHttpRequest();
@@ -40,19 +42,19 @@ inputField.onkeyup = ()=>{
     }
 }
 
-backBtn.onclick = ()=>{
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/typedestroy.php", true);
-    xhr.onload = () => {
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                console.log("destruction done");
-            }
-        }
-    }
-    let formData = new FormData(form);
-    xhr.send(formData);
-}
+// backBtn.onclick = ()=>{
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("POST", "php/typedestroy.php", true);
+//     xhr.onload = () => {
+//         if(xhr.readyState === XMLHttpRequest.DONE){
+//             if(xhr.status === 200){
+//                 console.log("destruction done");
+//             }
+//         }
+//     }
+//     let formData = new FormData(form);
+//     xhr.send(formData);
+// }
 
 sendBtn.onclick = ()=>{
     let xhr = new XMLHttpRequest();

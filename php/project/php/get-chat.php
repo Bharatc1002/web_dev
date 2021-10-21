@@ -18,19 +18,43 @@
         clearResult($conn);
         if($query -> num_rows > 0){
             while($row = $query -> fetch_assoc()){
+
+                if($row['f_ile'] != NULL){
+                    $file_explode = explode('.',$row['f_ile']);
+                    $file_ext = end($file_explode);
+    
+                    $extensions = ["jpeg", "png", "jpg"];
+                    if(in_array($file_ext, $extensions) === true){
+                            $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">
+                                    <img src="php/files/'.$row['f_ile'].'" style="'.$my_img.'"></img>
+                                    </a>';
+                    }else {
+                        $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">Open File</a>';
+                    }
+                } else {
+                    $anc = '';
+                }
+
+                if($row['msg'] != NULL){
+                    $msg = '<p>'. $row['msg'] .'</p>';
+                } else {
+                    $msg = '';
+                }
                 if($row['outgoing_msg_id'] === $outgoing_id){
                     $output .= '<div class="chat outgoing">
-                                <div class="details">
-                                    <p>'. $row['msg'] .'</p>
-                                </div>
+                                    <div class="details">
+                                    '. $msg .'
+                                    '.$anc.'
+                                    </div>
                                 </div>';
                 }else{
                     $output .= '<div class="chat incoming">
-                                <img src="php/images/'.$row['img'].'" alt="">
-                                <div class="details">
-                                    <p>'. $row['msg'] .'</p>
-
-                                </div>
+                                    <img src="php/images/'.$row['img'].'" alt="">
+                                    <div class="details">
+                                    '. $msg .'
+                                    <br>
+                                    '.$anc.'
+                                    </div>
                                 </div>';
                 }
             }

@@ -73,9 +73,10 @@
             $typ = $you . $msg;
         }
         
+        $refresh = '<script src="../javascript/refresh.js"></script>';
 
-
-        $output .= '<a href="chat.php?user_id='. $row['unique_id'] .'">
+        echo $refresh;
+        $output .= '<a href="users.php?user_id='. $row['unique_id'] .'">
                         <div class="content" style="position: relative;">
                             <img src="php/images/'. $row['img'] .'" alt="">
                             '.$style .'
