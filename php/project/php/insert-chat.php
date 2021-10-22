@@ -36,8 +36,12 @@
                         }
                     }
                 } else {
-                    $sql = $conn -> query("INSERT INTO messages(incoming_msg_id, outgoing_msg_id, f_ile, read_state)
+                    $time = time();
+                    $new_file_name = $time.$file_name;
+                    if(move_uploaded_file($tmp_name,"./files/".$new_file_name)){
+                        $sql = $conn -> query("INSERT INTO messages(incoming_msg_id, outgoing_msg_id, f_ile, read_state)
                                             VALUES({$incoming_id},{$outgoing_id},'{$new_file_name}',{$read_count})");
+                    }
                 }
                 // $file_explode = explode('.',$file_name);
                 // $file_ext = end($file_explode);

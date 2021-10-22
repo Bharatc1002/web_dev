@@ -3,7 +3,7 @@ session_start();
 include "php/config.php";
 include "header.php";
 ?>
-<body>
+<body class="update-body">
     <?php
     function clearResult($con){
         while($con -> next_result()){

@@ -2,7 +2,7 @@ const searchBar = document.querySelector(".search input"),
 searchIcon = document.querySelector(".search button"),
 usersList = document.querySelector(".users-list"),
 grpusersList = document.querySelector(".grpusers-list"),
-
+logoutBtn = document.querySelector(".users header .logout"),
 createGroup = document.querySelector(".users header .fa-users"),
 userUpdate = document.querySelector(".users header .content .fa-edit");
 
@@ -78,9 +78,44 @@ setInterval(() =>{
 
 userUpdate.onclick = ()=>{
   location.href = "update.php";
+  let xhr1 = new XMLHttpRequest();
+  xhr1.open("POST", "php/typedestroy.php", true);
+  xhr1.onload = () => {
+      if(xhr1.readyState === XMLHttpRequest.DONE){
+          if(xhr1.status === 200){
+              console.log("destruction done");
+          }
+      }
+  }
+  let formData = new FormData(form);
+  xhr1.send(formData);
 }
 
-createGroup.onclick = (e)=>{
-  e.preventDefault();
+createGroup.onclick = ()=>{
   location.href = "create_group.php";
+  let xhr2 = new XMLHttpRequest();
+  xhr2.open("POST", "php/typedestroy.php", true);
+  xhr2.onload = () => {
+      if(xhr2.readyState === XMLHttpRequest.DONE){
+          if(xhr2.status === 200){
+              console.log("destruction done");
+          }
+      }
+  }
+  let formData = new FormData(form);
+  xhr2.send(formData);
+}
+
+logoutBtn.onclick = ()=>{
+  let xhr3 = new XMLHttpRequest();
+  xhr3.open("POST", "php/typedestroy.php", true);
+  xhr3.onload = () => {
+      if(xhr3.readyState === XMLHttpRequest.DONE){
+          if(xhr3.status === 200){
+              console.log("destruction done");
+          }
+      }
+  }
+  let formData = new FormData(form);
+  xhr3.send(formData);
 }

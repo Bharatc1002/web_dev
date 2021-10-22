@@ -5,8 +5,8 @@
 ?>
 
 <?php include_once "header.php"; include_once "php/style.php"; ?>
-<body>
-  <div class="wrapper">
+<body class="update-body">
+  <div class="wrapper update-wrapper">
     <section class="users">
     <header>
         <div class="content">

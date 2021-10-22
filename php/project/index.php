@@ -6,8 +6,8 @@
 ?>
 
 <?php include_once "header.php"; ?>
-<body>
-  <div class="wrapper">
+<body class="update-body">
+  <div class="wrapper update-wrapper">
     <section class="form signup">
       <header>Chat App</header>
       <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">

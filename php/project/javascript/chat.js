@@ -11,8 +11,9 @@ form.onsubmit = (e)=>{
 }
 
 inputField.focus();
+
 inputField.onkeyup = ()=>{
-    if(inputField.value != "" || document.getElementById("file").files.length > 0){
+    if(inputField.value != ""){
         sendBtn.classList.add("active");
         if(inputField.value != ""){
             let xhr = new XMLHttpRequest();
@@ -74,17 +75,17 @@ sendBtn.onclick = ()=>{
               
               sendBtn.classList.remove("active");
               scrollToBottom();
-              let xhr1 = new XMLHttpRequest();
-              xhr1.open("POST", "php/typedestroy.php", true);
-              xhr1.onload = () => {
-                  if(xhr1.readyState === XMLHttpRequest.DONE){
-                      if(xhr1.status === 200){
-                          console.log("destruction done");
-                      }
-                  }
-              }
-              let formData = new FormData(form);
-              xhr1.send(formData);
+            //   let xhr1 = new XMLHttpRequest();
+            //   xhr1.open("POST", "php/typedestroy.php", true);
+            //   xhr1.onload = () => {
+            //       if(xhr1.readyState === XMLHttpRequest.DONE){
+            //           if(xhr1.status === 200){
+            //               console.log("destruction done");
+            //           }
+            //       }
+            //   }
+            //   let formData = new FormData(form);
+            //   xhr1.send(formData);
               
           }
       }
@@ -101,6 +102,22 @@ chatBox.onmouseleave = ()=>{
 }
 
 setInterval(() =>{
+    if(document.getElementById("file").files.length > 0){
+        sendBtn.classList.add("active");
+    } else {}
+    if(inputField.value == ""){
+        let xhr1 = new XMLHttpRequest();
+              xhr1.open("POST", "php/typedestroy.php", true);
+              xhr1.onload = () => {
+                  if(xhr1.readyState === XMLHttpRequest.DONE){
+                      if(xhr1.status === 200){
+                          console.log("destruction done");
+                      }
+                  }
+              }
+              let formData = new FormData(form);
+              xhr1.send(formData);
+    }
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/get-chat.php", true);
     xhr.onload = ()=>{

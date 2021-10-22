@@ -22,7 +22,7 @@ $backbtn = "width:40%; height: 45px;
 
 $edit_style = "position: absolute;
                top: 20px;
-               right: -7px;
+               right: -5px;
                cursor: pointer;
                border-radius: 50%;
                height: 30px;
@@ -37,8 +37,8 @@ $edit_style = "position: absolute;
 $my_img = "height: 70px;
             width: 70px;";
 
-$chat_img = "height: 150px;
-            width: 150px;";
+$chat_img = "height: 400px;
+            width: 400px;";
 
 
 ?>

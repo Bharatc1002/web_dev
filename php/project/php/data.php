@@ -20,7 +20,7 @@
         }else{
             $you = "";
         }
-        ($row['status'] == "Active now") ? $offline = "" : $offline = "offline";
+        ($row['status'] == "Active now") ? $offline = "online" : $offline = "offline";
         ($outgoing_id == $row['unique_id']) ? $hid_me = "hide" : $hid_me = "";
 
         clearResult($conn);
@@ -62,33 +62,29 @@
             $type_status = $typing -> fetch_assoc();
             if($type_status){
                 if($type_status['type_status'] == 1){
-                    $typ = "Typing...";   
+                    $typ = '<p>Typing...</p>';   
                 } else {
-                    $typ = $you . $msg;
+                    // $typ = $you . $msg;
                 }
             } else {
-                $typ = $you . $msg;
+                // $typ = $you . $msg;
             }
         } else {
-            $typ = $you . $msg;
+            // $typ = $you . $msg;
         }
-        
-        $refresh = '<script src="../javascript/refresh.js"></script>';
 
         echo $refresh;
-        $output .= '<a href="users.php?user_id='. $row['unique_id'] .'">
+        $output .= '<a href="users.php?user_id='. $row['unique_id'] .'" style="border-bottom-color: none; border: none;">
                         <div class="content" style="position: relative;">
                             <img src="php/images/'. $row['img'] .'" alt="">
                             '.$style .'
-                            <div class="details">
-                                <span>'. $row['fname']. " " . $row['lname'] .'</span>
-                                <p>'. $typ .'</p>
-                            </div>
-                        
+                            
+                                <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i>
+                                    <span class="user-span">'. $row['fname']. " " . $row['lname'] .'</span>
+                                    '.$typ.'
+                                </div>  
+                           
                         </div>
-
-                        <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
-                    
                     </a>';
 
 

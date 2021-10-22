@@ -2,6 +2,7 @@
     session_start();
     if(isset($_SESSION['unique_id'])){
         include_once "config.php";
+        include_once "style.php";
         $outgoing_id = $_SESSION['unique_id'];
         $incoming_id = $conn -> real_escape_string($_POST['incoming_id']);
         $output = "";
@@ -26,7 +27,7 @@
                     $extensions = ["jpeg", "png", "jpg"];
                     if(in_array($file_ext, $extensions) === true){
                             $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">
-                                    <img src="php/files/'.$row['f_ile'].'" style="'.$my_img.'"></img>
+                                    <img src="php/files/'.$row['f_ile'].'" style="'.$chat_img.'"></img>
                                     </a>';
                     }else {
                         $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">Open File</a>';
@@ -52,7 +53,6 @@
                                     <img src="php/images/'.$row['img'].'" alt="">
                                     <div class="details">
                                     '. $msg .'
-                                    <br>
                                     '.$anc.'
                                     </div>
                                 </div>';

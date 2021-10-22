@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql8
--- Generation Time: Oct 21, 2021 at 01:29 PM
+-- Generation Time: Oct 22, 2021 at 01:25 PM
 -- Server version: 8.0.26
 -- PHP Version: 7.4.24
 
@@ -152,18 +152,6 @@ CREATE TABLE `grpadmin` (
   `img_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `grpadmin`
---
-
-INSERT INTO `grpadmin` (`g_id`, `group_name`, `group_id`, `admin_id`, `img_name`) VALUES
-(1, 'newg', 1024903806, 561478034, '1634723390images.jpeg'),
-(2, 'second', 910921584, 561478034, '1634726201index.jpeg'),
-(3, 'fsafsaf', 853494766, 561478034, '1634821465abc.jpeg'),
-(4, 'egtreg', 1123862870, 561478034, '1634821513abc.jpeg'),
-(5, 'caawdwd', 720263526, 561478034, '1634821641abc.jpeg'),
-(6, 'sanmcscd', 793873854, 561478034, '1634821655abc.jpeg');
-
 -- --------------------------------------------------------
 
 --
@@ -175,21 +163,6 @@ CREATE TABLE `grpmember` (
   `group_id` int NOT NULL,
   `member_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `grpmember`
---
-
-INSERT INTO `grpmember` (`grp_id`, `group_id`, `member_id`) VALUES
-(1, 1024903806, 561478034),
-(2, 1024903806, 415331816),
-(3, 1024903806, 1570027521),
-(4, 910921584, 561478034),
-(5, 910921584, 415331816),
-(6, 853494766, 561478034),
-(7, 1123862870, 561478034),
-(8, 720263526, 561478034),
-(9, 793873854, 561478034);
 
 -- --------------------------------------------------------
 
@@ -211,38 +184,11 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `f_ile`, `read_state`) VALUES
-(1, 1024903806, 561478034, 'hi', NULL, 1),
-(2, 1024903806, 415331816, 'hi', NULL, 1),
-(3, 1024903806, 415331816, 'hws u', NULL, 1),
-(4, 1024903806, 1570027521, 'haloooo', NULL, 1),
-(32, 1024903806, 561478034, 'hi', NULL, 1),
-(33, 1024903806, 561478034, 'ok', '1634817886abc.jpeg', 1),
-(34, 1024903806, 561478034, 'LALALALA', '1634818860index.jpeg', 1),
-(35, 1024903806, 561478034, 'file', '1634819293test_db.sql', 1),
-(36, 1024903806, 561478034, 'afafhjsaasfsaasvav vnasvhbashvavhfabv', '1634819452images.jpeg', 1),
-(37, 1024903806, 561478034, 'nice', NULL, 1),
-(38, 1024903806, 561478034, 'if', '1634820030abc.jpeg', 1),
-(39, 1024903806, 561478034, 'ok', '1634820039abc.jpeg', 1),
-(40, 1024903806, 561478034, 'hi', NULL, 1),
-(41, 1024903806, 561478034, 'by', '1634820197index.jpeg', 1),
-(42, 1024903806, 561478034, 'bb', '1634820201index.jpeg', 1),
-(43, 1024903806, 561478034, NULL, '', 1),
-(44, 1024903806, 561478034, NULL, '', 1),
-(45, 1024903806, 561478034, NULL, '', 1),
-(46, 1024903806, 561478034, 'sgf', NULL, 1),
-(47, 1024903806, 561478034, 'g', NULL, 1),
-(48, 1024903806, 561478034, 'gfsgf', NULL, 1),
-(49, 1024903806, 561478034, 'gs', NULL, 1),
-(50, 1024903806, 561478034, 'gsgsgs', NULL, 1),
-(51, 1024903806, 561478034, 'g', NULL, 1),
-(52, 1024903806, 561478034, 'g', NULL, 1),
-(53, 1024903806, 561478034, 'g', NULL, 1),
-(54, 1024903806, 561478034, 'g', NULL, 1),
-(55, 1024903806, 561478034, 'g', NULL, 1),
-(56, 1024903806, 561478034, 'sgsgs', NULL, 1),
-(57, 1024903806, 561478034, 'gsg', NULL, 1),
-(58, 1024903806, 561478034, 'g', NULL, 1),
-(59, 1024903806, 561478034, 'g', NULL, 1);
+(3, 1313734085, 1438628237, NULL, '1634903377abc.jpeg', 0),
+(4, 1313734085, 1438628237, NULL, '1634903393doc.pdf', 0),
+(5, 1313734085, 1438628237, 'hi', NULL, 0),
+(6, 1313734085, 1438628237, NULL, '1634904508abc.jpeg', 0),
+(7, 1438628237, 1313734085, 'chal chal', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -262,13 +208,9 @@ CREATE TABLE `typeStatus` (
 --
 
 INSERT INTO `typeStatus` (`ids`, `sender_id`, `receiver_id`, `type_status`) VALUES
-(1, 561478034, 1024903806, 0),
-(2, 415331816, 1024903806, 0),
-(3, 1570027521, 1024903806, 0),
-(4, 561478034, 1570027521, 0),
-(5, 561478034, 910921584, 0),
-(6, 561478034, 415331816, 0),
-(7, 561478034, 1227660629, 0);
+(1, 415331816, 1024903806, 0),
+(2, 1438628237, 1313734085, 0),
+(3, 1313734085, 1438628237, 0);
 
 -- --------------------------------------------------------
 
@@ -294,12 +236,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `last_seenTime`, `last_seenDate`) VALUES
-(1, 561478034, 'Rishi', 'Patel', 'rishi.p.addweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1634718211index.jpeg', 'Active now', '18:40:51', '2021-10-21'),
-(2, 415331816, 'Bharat', 'Chaudhary', 'bharat.c.addweb@gmail.com', '73fcee19c245fade5d57f35e0dd27c31', '1634718672abc.jpeg', 'Active now', '13:44:13', '2021-10-20'),
-(6, 1570027521, 'Ketan', 'Dabhi', 'ketan.d.addweb@gmail.com', '7c050137046892135f2616268d3d89d6', '1634723545images.jpeg', 'Active now', '15:34:24', '2021-10-20'),
-(7, 1227660629, 'newUser', 'User', 'bharat.addweb@gmail.com', '73fcee19c245fade5d57f35e0dd27c31', '1634813211abc.jpeg', '16:17:01', '16:17:01', '2021-10-21'),
-(8, 318321785, 'dhsg', 'sfgg', 'rishi.p.ddweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1634821865abc.jpeg', '18:41:10', '18:41:10', '2021-10-21'),
-(9, 431654110, 'sgfsgf', 'sgfgf', 'rishi.p.addweb@gail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1634821884abc.jpeg', '18:41:30', '18:41:30', '2021-10-21');
+(1, 1438628237, 'Rishi', 'Patel', 'rishi.p.addweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1634900982abc.jpeg', '18:54:31', '18:54:31', '2021-10-22'),
+(2, 1313734085, 'Google', '.Com', 'google@gmail.com', 'b8f8312b939f00abb38eeafd4fd107f3', '1634902392Sample-jpg-image-50kb.jpg', '18:54:23', '18:54:23', '2021-10-22');
 
 --
 -- Indexes for dumped tables
@@ -343,31 +281,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `grpadmin`
 --
 ALTER TABLE `grpadmin`
-  MODIFY `g_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `g_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grpmember`
 --
 ALTER TABLE `grpmember`
-  MODIFY `grp_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `grp_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `msg_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `typeStatus`
 --
 ALTER TABLE `typeStatus`
-  MODIFY `ids` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ids` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

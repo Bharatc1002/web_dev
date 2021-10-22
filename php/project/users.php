@@ -16,7 +16,7 @@
 ?>
 <?php include_once "header.php"; include_once "php/style.php"; ?>
 <body>
-  <div class="wrapper">
+  <div class="wrapper users-wrapper">
     <section class="users">
       <header>
         <div class="content">
@@ -29,14 +29,14 @@
           ?>
           <div style="position: relative;">
             <img src="php/images/<?php echo $row['img']; ?>" style="<?php echo $my_img ?>" alt="">
-            <i class="fa fa-edit" style="<?php echo $edit_style ?>"></i>
+            <i class="fa fa-edit"></i>
           </div>
           <div class="details">
             <span><?php echo $row['fname']. " " . $row['lname'] ?></span>
             <p>Active now</p>
           </div>
         </div>
-        <i class="fas fa-users" style="display: flex; cursor:pointer;"></i>
+        <i class="fas fa-users" ></i>
         <a href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>" class="logout">Logout</a>
       </header>
       <div class="search">
@@ -44,13 +44,13 @@
         <input type="text" placeholder="Enter name to search...">
         <button><i class="fas fa-search"></i></button>
       </div>
-      <div class="grpusers-list" style="max-height: 200px;
-                  overflow-y: auto;">
-  
-      </div>
-      <div class="users-list" style="  max-height: 200px;
-                  overflow-y: auto;">
-  
+      <div class="column">
+        <div class="grpusers-list" >
+    
+        </div>
+        <div class="users-list">
+    
+        </div>
       </div>
     </section>
   </div>
