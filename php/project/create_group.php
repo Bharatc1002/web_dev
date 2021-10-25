@@ -29,7 +29,7 @@
     </section>
     <!-- <section class="users"> -->
     <header>
-            <span style="margin-left: 30px; margin-bottom: 0px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; outline: none">Make New Group</span>
+            <span class="makeGrp">Make New Group</span>
       </header>
     <!-- </section> -->
     <section class="form signup">
@@ -47,7 +47,7 @@
           <input type="submit" class="create" style="width:40%;" name="submit" value="Create Group">
         </div>
       </form>
-      <input type="submit" class="back" style="<?php echo $backbtn; ?>" name="Back" value="Back To Chat">
+      <input type="submit" class="back back-btn" name="Back" value="Back To Chat">
     </section>
   </div>
   <script src="javascript/create_group.js"></script>

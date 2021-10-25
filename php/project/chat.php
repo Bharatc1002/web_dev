@@ -14,7 +14,7 @@
           if($chatsql -> num_rows > 0){
             $chatrow = $chatsql -> fetch_assoc();
         ?>
-        <!-- <a href="users.php" class="back-icon"><i class="fas fa-arrow-left"></i></a> -->
+
         <img src="php/images/<?php echo $chatrow['img']; ?>" alt="">
         <div class="details chat-details">
           <span><?php echo $chatrow['fname']. " " . $chatrow['lname'] ?></span>
@@ -32,17 +32,23 @@
         </div>
         <?php
           if($_SESSION['unique_id'] == $grprow['admin_id']){ ?>
-            <a href="adduser.php" class="back-icon" style="display: flex; justify-content: flex-end;
-                                        align-items: center; margin-left: 80%;">
+            <a href="adduser.php" class="back-icon plus-icon" style="margin-left: 80%;">
                 <i class='fas fa-plus'></i>
             </a>
-          <?php } ?>
-
-        <?php
-        } else {
-
+            <a href="grpmember.php" class="back-icon" style="margin-left:5px;">
+            <i class="fas fa-layer-group"></i>
+            </a>
+          <?php } else if(!empty($_SESSION['user_id'])) { ?>
+          <a href="grpmember.php" class="back-icon plus-icon" style="margin-left: 80%;">
+          <i class="fas fa-layer-group"></i>
+          </a>
+        <?php } else {
+            
         }
         ?>
+
+        <?php
+        } ?>
       </header>
       <?php
       if($_SESSION['user_id']){
@@ -56,8 +62,8 @@
         <?php include_once "php/style.php"; ?>
         <input type="text" class="incoming_id" name="incoming_id" value="<?php echo $user_id; ?>" hidden>
         <input type="text" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
-        <label for="file" <?php echo $input_style ?>>
-        <i class="fas fa-ellipsis-h" style="opacity:0.8;width:55px;"></i>
+        <label for="file">
+        <i class="fas fa-ellipsis-h"></i>
         </label>
         <input type="file" id="file" name="file" class="file-field" style="display:none">
         <button id="button"><i class="fab fa-telegram-plane"></i></button>

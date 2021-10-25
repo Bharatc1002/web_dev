@@ -70,12 +70,10 @@
                         <img src="php/images/'. $row['img'] .'" alt="">
                         <div class="details">
                             <span>'. $row['fname']. " " . $row['lname'] .'</span>
-                            <p>'. $typ .'</p>
                         </div>
                         '.$style .'
                         </div>
 
-                        <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
                     
                     </a>';
 

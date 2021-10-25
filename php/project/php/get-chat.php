@@ -27,7 +27,7 @@
                     $extensions = ["jpeg", "png", "jpg"];
                     if(in_array($file_ext, $extensions) === true){
                             $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">
-                                    <img src="php/files/'.$row['f_ile'].'" style="'.$chat_img.'"></img>
+                                    <img src="php/files/'.$row['f_ile'].'" class="message-img" ></img>
                                     </a>';
                     }else {
                         $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">Open File</a>';
@@ -50,7 +50,7 @@
                                 </div>';
                 }else{
                     $output .= '<div class="chat incoming">
-                                    <img src="php/images/'.$row['img'].'" alt="">
+                                    <img class="img" src="php/images/'.$row['img'].'" alt="">
                                     <div class="details">
                                     '. $msg .'
                                     '.$anc.'

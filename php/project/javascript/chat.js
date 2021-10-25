@@ -2,6 +2,7 @@ const form = document.querySelector(".typing-area"),
 incoming_id = form.querySelector(".incoming_id").value,
 inputField = form.querySelector(".input-field"),
 sendBtn = form.querySelector("button"),
+fileSelect = form.querySelector("label"),
 chatBox = document.querySelector(".chat-box");
 const button = document.getElementById("button")
 // backBtn = document.querySelector("header .back-icon")
@@ -43,20 +44,6 @@ inputField.onkeyup = ()=>{
         xhr.send(formData);
     }
 }
-
-// backBtn.onclick = ()=>{
-//     let xhr = new XMLHttpRequest();
-//     xhr.open("POST", "php/typedestroy.php", true);
-//     xhr.onload = () => {
-//         if(xhr.readyState === XMLHttpRequest.DONE){
-//             if(xhr.status === 200){
-//                 console.log("destruction done");
-//             }
-//         }
-//     }
-//     let formData = new FormData(form);
-//     xhr.send(formData);
-// }
 
 button.onclick = ()=>{
     var file = document.getElementById("file");
@@ -104,6 +91,7 @@ chatBox.onmouseleave = ()=>{
 setInterval(() =>{
     if(document.getElementById("file").files.length > 0){
         sendBtn.classList.add("active");
+        fileSelect.classList.add("active");
     } else {}
     if(inputField.value == ""){
         let xhr1 = new XMLHttpRequest();

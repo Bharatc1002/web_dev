@@ -2,6 +2,7 @@ const form = document.querySelector(".typing-area"),
 incoming_id = form.querySelector(".incoming_id").value,
 inputField = form.querySelector(".input-field"),
 sendBtn = form.querySelector("button"),
+fileSelect = form.querySelector("label"),
 chatBox = document.querySelector(".chat-box");
 // backBtn = document.querySelector("header .back-icon")
 
@@ -92,6 +93,23 @@ chatBox.onmouseleave = ()=>{
 }
 
 setInterval(() =>{
+    if(document.getElementById("file").files.length > 0){
+        sendBtn.classList.add("active");
+        fileSelect.classList.add("active");
+    } else {}
+    if(inputField.value == ""){
+        let xhr1 = new XMLHttpRequest();
+              xhr1.open("POST", "php/typedestroy.php", true);
+              xhr1.onload = () => {
+                  if(xhr1.readyState === XMLHttpRequest.DONE){
+                      if(xhr1.status === 200){
+                          console.log("destruction done");
+                      }
+                  }
+              }
+              let formData = new FormData(form);
+              xhr1.send(formData);
+    }
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/get-chatgrp.php", true);
     xhr.onload = ()=>{

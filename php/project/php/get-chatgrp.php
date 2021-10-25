@@ -29,8 +29,6 @@
     
                     $extensions = ["jpeg", "png", "jpg"];
                     if(in_array($file_ext, $extensions) === true){
-                        // $types = ["file/jpeg", "file/jpg", "file/png"];
-                        // if(in_array($file_type, $types) === true){
                             $anc = '<a href="php/files/'.$row['f_ile'].'" style="color: red;">
                                     <img src="php/files/'.$row['f_ile'].'" style="'.$chat_img.'"></img>
                                     </a>'; 
@@ -49,11 +47,8 @@
                     $msg = '';
                 }
 
-                // $findSender = $conn -> query("SELECT * FROM users WHERE unique_id = {$row['outgoing_msg_id']}");
-                // $senderName = $findSender -> fetch_assoc();
-
                 if($row['outgoing_msg_id'] === $outgoing_id){
-                    // if($row['msg'] != NULL)
+     
                     $output .= '<div class="chat outgoing">
                                 <div class="details">
                                 <div>'.$anc.'</div>

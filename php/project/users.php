@@ -28,7 +28,7 @@
             }
           ?>
           <div style="position: relative;">
-            <img src="php/images/<?php echo $row['img']; ?>" style="<?php echo $my_img ?>" alt="">
+            <img src="php/images/<?php echo $row['img']; ?>" class="user-img" alt="">
             <i class="fa fa-edit"></i>
           </div>
           <div class="details">
