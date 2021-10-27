@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql8
--- Generation Time: Oct 25, 2021 at 01:17 PM
+-- Generation Time: Oct 27, 2021 at 01:13 PM
 -- Server version: 8.0.26
 -- PHP Version: 7.4.24
 
@@ -210,7 +210,7 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (6, 1313734085, 1438628237, NULL, '1634904508abc.jpeg', 0),
 (7, 1438628237, 1313734085, 'chal chal', NULL, 0),
 (8, 1619732457, 1438628237, NULL, '1635146728abc.jpeg', 1),
-(9, 1438628237, 1313734085, 'mane admin banavo', NULL, 1),
+(9, 1438628237, 1313734085, 'mane admin banavo', NULL, 0),
 (10, 270599314, 1313734085, 'kem kem karo cho', NULL, 1),
 (11, 270599314, 1438628237, 'majama', NULL, 1),
 (12, 1438628237, 692496982, NULL, '1635162135index.jpeg', 0),
@@ -221,7 +221,9 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (17, 279293670, 1438628237, NULL, '1635165873abc.jpeg', 1),
 (18, 279293670, 1438628237, NULL, '1635165874abc.jpeg', 1),
 (19, 279293670, 1438628237, NULL, '1635165880abc.jpeg', 1),
-(20, 692496982, 1438628237, NULL, '1635165896abc.jpeg', 0);
+(20, 692496982, 1438628237, NULL, '1635165896abc.jpeg', 0),
+(21, 1438628237, 1313734085, 'lmvnxzpjf[pdsjoangopesgjof[dsigp0vjfsp-golv-[fsos=g[vbagrfgr\\', NULL, 0),
+(22, 1438628237, 1313734085, ' ', '1635340348test_db.sql', 0);
 
 -- --------------------------------------------------------
 
@@ -282,10 +284,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `last_seenTime`, `last_seenDate`) VALUES
-(1, 1438628237, 'Rishi', 'Patel', 'rishi.p.addweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1635162437images.jpeg', 'Active now', '17:06:03', '2021-10-25'),
+(1, 1438628237, 'Rishi', 'Patel', 'rishi.p.addweb@gmail.com', '9e58d6ab9e42c22ebd5c63e97c36004d', '1635162437images.jpeg', 'Active now', '19:05:38', '2021-10-25'),
 (2, 1313734085, 'Google', '.Com', 'google@gmail.com', 'b8f8312b939f00abb38eeafd4fd107f3', '1634902392Sample-jpg-image-50kb.jpg', 'Active now', '18:54:23', '2021-10-22'),
 (3, 1619732457, 'Bharat', 'Chaudhary', 'bharat.c.addweb@gmail.com', '73fcee19c245fade5d57f35e0dd27c31', '1635138833images.jpeg', '17:08:55', '17:08:55', '2021-10-25'),
-(4, 692496982, 'Jigish', 'Chauhan', 'jigish.addweb@gmail.com', '3ea90e2b4cde865e8a4b2ec0659884fe', '1635161821index.jpeg', 'Active now', '17:09:41', '2021-10-25');
+(4, 692496982, 'Jigish', 'Chauhan', 'jigish.addweb@gmail.com', '3ea90e2b4cde865e8a4b2ec0659884fe', '1635161821index.jpeg', '19:05:45', '19:05:45', '2021-10-25');
 
 --
 -- Indexes for dumped tables
@@ -341,7 +343,7 @@ ALTER TABLE `grpmember`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `msg_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `typeStatus`

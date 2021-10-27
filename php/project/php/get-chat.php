@@ -65,5 +65,4 @@
     }else{
         header("location: ../login.php");
     }
-
 ?>

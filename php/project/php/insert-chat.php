@@ -43,17 +43,6 @@
                                             VALUES({$incoming_id},{$outgoing_id},'{$new_file_name}',{$read_count})");
                     }
                 }
-                // $file_explode = explode('.',$file_name);
-                // $file_ext = end($file_explode);
-
-                // $extensions = ["jpeg", "png", "jpg"];
-                // if(in_array($file_ext, $extensions) === true){
-                //     $types = ["image/jpeg", "image/jpg", "image/png"];
-                //     if(in_array($file_type, $types) === true){
-
-                //         }
-                //     }
-                // } 
             } else {
                 $read_count = 1;
                 if(!empty($message)){

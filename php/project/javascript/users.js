@@ -1,13 +1,41 @@
 const searchBar = document.querySelector(".search input"),
 searchIcon = document.querySelector(".search button"),
 usersList = document.querySelector(".users-list"),
+usersListA = document.querySelector(".users-list"),
 grpusersList = document.querySelector(".grpusers-list"),
+grpusersListA = document.querySelector(".grpusers-list"),
+
 logoutBtn = document.querySelector(".users header .logout"),
 createGroup = document.querySelector(".users header .fa-users"),
 userUpdate = document.querySelector(".users header .content .fa-edit");
 
 
-
+usersListA.onclick = () => {
+  let xhra = new XMLHttpRequest();
+  xhra.open("POST", "php/typedestroy.php", true);
+  xhra.onload = () => {
+      if(xhra.readyState === XMLHttpRequest.DONE){
+          if(xhra.status === 200){
+              console.log("destruction done");
+          }
+      }
+  }
+  let formData = new FormData(form);
+  xhra.send(formData);
+}
+grpusersListA.onclick = () => {
+  let xhr1a = new XMLHttpRequest();
+  xhr1a.open("POST", "php/typedestroy.php", true);
+  xhr1a.onload = () => {
+      if(xhr1a.readyState === XMLHttpRequest.DONE){
+          if(xhr1a.status === 200){
+              console.log("destruction done");
+          }
+      }
+  }
+  let formData = new FormData(form);
+  xhr1a.send(formData);
+}
 
 searchIcon.onclick = ()=>{
   searchBar.classList.toggle("show");
